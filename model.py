@@ -4,7 +4,6 @@ class NaiveBayes:
         self.feature_prob = {}
 
     def fit(self, X_train, y_train):
-        # Menghitung probabilitas kelas dan fitur
         total_samples = len(y_train)
         self.class_prob = {label: sum(y_train == label) / total_samples for label in set(y_train)}
 
@@ -161,63 +160,59 @@ import time
 
 import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, confusion_matrix
+from sklearn.metrics import accuracy_score, confusion_matrix, precision_score, recall_score, f1_score, roc_auc_score
 
 class EvaluationMetrics:
     def __init__(self):
-        self.accuracies = []
-        self.confusion_matrices = []
+        self.accuracy = None
+        self.confusion_matrix = None
         self.execution_time = None
-        self.average_accuracy = None
-        self.overall_confusion_matrix = None
+        self.accuracy = None
+        self.precision = None
+        self.recall = None
+        self.f1_score = None
+        self.auc = None
 
-    def calculate_overall_metrics(self):
-        # Calculate average accuracy
-        self.average_accuracy = np.mean(self.accuracies)
+    def evaluate_model(self, model, X_train, X_test, y_train, y_test):
+        start_time = time.time()
+        model.fit(X_train, y_train)
+        y_pred = model.predict(X_test)
+        end_time = time.time()
 
-        # Calculate overall confusion matrix
-        self.overall_confusion_matrix = sum(self.confusion_matrices)
-    def evaluate_model(self, model, X, y, split_ratio, num_splits):
-        # Placeholder for storing evaluation results
-        accuracies = []
-        confusion_matrices = []
-        execution_times = []
-        
+        # Calculate accuracy
+        self.accuracy = accuracy_score(y_test, y_pred)
 
-        for fold in range(num_splits):
-            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=split_ratio, random_state=42)
+        # Calculate accuracy
+        self.accuracy = accuracy_score(y_test, y_pred)
 
-            start_time = time.time()
-            model.fit(X_train, y_train)
-            y_pred = model.predict(X_test)
-            end_time = time.time()
+        # Calculate precision
+        self.precision = precision_score(y_test, y_pred, average='weighted')
 
-            # Calculate accuracy for each split
-            accuracy = accuracy_score(y_test, y_pred)
-            accuracies.append(accuracy)
+        # Calculate recall
+        self.recall = recall_score(y_test, y_pred, average='weighted')
 
-            # Calculate confusion matrix for each split
-            cm = confusion_matrix(y_test, y_pred)
-            confusion_matrices.append(cm)
+        # Calculate F1 score
+        self.f1_score = f1_score(y_test, y_pred, average='weighted')
 
-            # Calculate execution time for each split
-            execution_times.append(end_time - start_time)
+        # Calculate AUC
+        self.auc = roc_auc_score(y_test, y_pred)
 
-            # Save accuracy and confusion matrix for each fold
-            self.accuracies.append(accuracy)
-            self.confusion_matrices.append(cm)
+        # Calculate confusion matrix
+        self.confusion_matrix = confusion_matrix(y_test, y_pred)
 
+        # Calculate execution time
+        self.execution_time = end_time - start_time
 
-        # Aggregate evaluation results
-        self.execution_time = np.mean(execution_times)
+        return self.accuracy, self.confusion_matrix, self.execution_time, self.precision, self.recall, self.f1_score, self.auc
 
-        # Calculate overall metrics
-        self.calculate_overall_metrics()
-        return self.accuracies, self.confusion_matrices, self.execution_time
 
 
 
  
+
+
+
+
 
 
 
