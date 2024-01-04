@@ -13,7 +13,8 @@ import time
 
 import numpy as np
 def main():
-    image = Image.open('logo.png')  
+    # image = Image.open('logo.png')  
+    image_url = 'https://drive.google.com/file/d/1fBKkWO3X6YaqJI-Tvh7WiE4BAAEb3hnB/view?usp=sharing'
     width = 150  
     st.image(image, caption='Klasifikasi beasiswa Unsri', width=width)
     # st.image(image, caption='Deskripsi Gambar', use_column_width=True)
