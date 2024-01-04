@@ -13,7 +13,13 @@ import time
 
 import numpy as np
 def main():
-    st.title("Machine Learning Model Evaluation")
+    image = Image.open('logo.png')  
+    width = 150  
+    st.image(image, caption='Klasifikasi beasiswa Unsri', width=width)
+    # st.image(image, caption='Deskripsi Gambar', use_column_width=True)
+
+    st.title("Data Mining Model Evaluation")
+    st.write('Perbandingan Algortima Decision Tree (C4.5), Random Forest, dan Naive Bayes dalam Klasifikasi Penerima Beasiswa KIP Unsri')
 
     uploaded_file = st.sidebar.file_uploader("Upload Excel", type=["xlsx", "xls"])
 
