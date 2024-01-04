@@ -13,11 +13,6 @@ import time
 
 import numpy as np
 def main():
-    # image = Image.open('logo.png')  
-    image_url = 'https://drive.google.com/uc?id=1fBKkWO3X6YaqJI-Tvh7WiE4BAAEb3hnB'
-    width = 150  
-    st.image(image, caption='Klasifikasi beasiswa Unsri', width=width)
-    # st.image(image, caption='Deskripsi Gambar', use_column_width=True)
 
     st.title("Data Mining Model Evaluation")
     st.write('Perbandingan Algortima Decision Tree (C4.5), Random Forest, dan Naive Bayes dalam Klasifikasi Penerima Beasiswa KIP Unsri')
