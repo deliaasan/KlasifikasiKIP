@@ -34,13 +34,13 @@ def main():
             st.write("Dataset Preview:")
             # st.write(df)
             try:
+                realFile = pd.read_csv(file_path)    
+                realFile = pd.DataFrame(realFile)
+                st.dataframe(realFile)
             except FileNotFoundError as e:
                 st.error(f"File tidak ditemukan: {e}")
             except Exception as e:
                 st.error(f"Terjadi kesalahan: {e}")
-            realFile = pd.read_csv(file_path)    
-            realFile = pd.DataFrame(realFile)
-            st.dataframe(realFile)
             
 
             # Define 'Label' column as the target class
