@@ -17,7 +17,7 @@ def main():
     st.markdown("<h1 style='text-align: center'>Data Mining Model Evaluation</h1>", unsafe_allow_html=True)
     col, logo2, col = st.columns([1, 1, 1])
     with logo2:
-        image = Image.open('logo.png')  
+        image = Image.open('logo-unsri.png')  
         width = 150  
         st.image(image, caption='Klasifikasi beasiswa Unsri', width=width)
         st.markdown("<p style='text-align: center'>Perbandingan Algortima Decision Tree (C4.5), Random Forest, dan Naive Bayes dalam Klasifikasi Penerima Beasiswa KIP Unsri</p>", unsafe_allow_html=True)
