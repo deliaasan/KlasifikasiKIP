@@ -38,7 +38,8 @@ class NaiveBayes:
             predictions.append(max_class)
         return predictions
 
-    
+
+# Proses klasifikasi dengan Decision Tree   
 class DecisionTree:
     def __init__(self):
         self.tree = None
@@ -132,7 +133,7 @@ class DecisionTree:
         return predictions
 
  
-
+# Proses klasifikasi dengan Random Forest
 import random
 
 class RandomForest:
@@ -204,15 +205,3 @@ class EvaluationMetrics:
         self.execution_time = end_time - start_time
 
         return self.accuracy, self.confusion_matrix, self.execution_time, self.precision, self.recall, self.f1_score, self.auc
-
-
-
-
- 
-
-
-
-
-
-
-
