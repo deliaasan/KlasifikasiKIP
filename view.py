@@ -33,6 +33,11 @@ def main():
         if 'Label' in df.columns:
             st.write("Dataset Preview:")
             # st.write(df)
+            try:
+                except FileNotFoundError as e:
+                st.error(f"File tidak ditemukan: {e}")
+                except Exception as e:
+            st.error(f"Terjadi kesalahan: {e}")
             realFile = pd.read_csv(file_path)    
             realFile = pd.DataFrame(realFile)
             st.dataframe(realFile)
