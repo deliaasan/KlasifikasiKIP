@@ -13,7 +13,7 @@ import time
 
 import numpy as np
 def main():
-    file_path = 'DataReal.csv'
+    file_path = 'https://raw.githubusercontent.com/deliaasan/repository/main/DataReal.csv'
     st.markdown("<h1 style='text-align: center'>Data Mining Model Evaluation</h1>", unsafe_allow_html=True)
     col, logo2, col = st.columns([1, 1, 1])
     with logo2:
