@@ -17,33 +17,28 @@ def main():
     st.markdown("<h1 style='text-align: center'>Data Mining Model Evaluation</h1>", unsafe_allow_html=True)
     col, logo2, col = st.columns([1, 1, 1])
     with logo2:
-        image = Image.open('logo-unsri.png')  
+        image = Image.open('logo.png')  
         width = 150  
         st.image(image, caption='Klasifikasi beasiswa Unsri', width=width)
-        st.markdown("<p style='text-align: center'>Perbandingan Algortima Decision Tree (C4.5), Random Forest, dan Naive Bayes dalam Klasifikasi Penerima Beasiswa KIP Unsri</p>", unsafe_allow_html=True)
+   
+    st.markdown("<p style='text-align: center'>Perbandingan Algortima Decision Tree (C4.5), Random Forest, dan Naive Bayes dalam Klasifikasi Penerima Beasiswa KIP Unsri</p>", unsafe_allow_html=True)
     
 
     uploaded_file = st.sidebar.file_uploader("Upload Excel", type=["xlsx", "xls"])
-    
     if uploaded_file is not None:
         df = pd.read_excel(uploaded_file)
         
 
-        # Check if 'Label' column exists
+        # cek apakah ada label
         if 'Label' in df.columns:
             st.write("Dataset Preview:")
             # st.write(df)
-            try:
-                realFile = pd.read_csv(file_path)    
-                realFile = pd.DataFrame(realFile)
-                st.dataframe(realFile)
-            except FileNotFoundError as e:
-                st.error(f"File tidak ditemukan: {e}")
-            except Exception as e:
-                st.error(f"Terjadi kesalahan: {e}")
+            realFile = pd.read_csv(file_path)    
+            realFile = pd.DataFrame(realFile)
+            st.dataframe(realFile)
             
 
-            # Define 'Label' column as the target class
+            # mendifinisikan kolom label sbg target kelas
             class_col = 'Label'
             y = df[class_col]
             X = df.drop(columns=[class_col])
@@ -56,7 +51,7 @@ def main():
             split_ratio = st.sidebar.slider("Training-Testing Split Ratio", 0.1, 0.9, 0.2)
             st.write(f"Pengguna memilih split ratio: {split_ratio}")
  
-            # Check if split ratio is chosen
+            # memeriksa apakah split data sudah dipilih
             if split_ratio:
                 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=split_ratio, random_state=42)
                 st.write(f"Jumlah data training: {len(X_train)}")
@@ -141,7 +136,7 @@ def main():
                 start_time = time.time()
                 random_forest = RandomForest()
                 eval_metrics = EvaluationMetrics()
-                accuracy, dd, execution_time, precision, recall, f1_score, auc = eval_metrics.evaluate_model(random_forest, X_train, X_test, y_train, y_test)
+                accuracy, confusion_matrix, execution_time, precision, recall, f1_score, auc = eval_metrics.evaluate_model(random_forest, X_train, X_test, y_train, y_test)
                 end_time = time.time()
                 new_confusion_matrix = convert_confusion_matrix(confusion_matrix)
                 st.write(f"Waktu Eksekusi Random Forest: {end_time - start_time:.2f} detik")
@@ -153,6 +148,7 @@ def main():
                 st.write("Confusion Matrix Random Forest")
                 st.write(new_confusion_matrix)
             
+            # menampilkan hasil perbandingan dari metode diatas
             if st.button("Perbandingan"):
                 start_time = time.time()
                 naive_bayes = NaiveBayes()
@@ -204,6 +200,8 @@ def main():
                     ]
                 })
 
+                
+                # menampilkan hasil akhir perbandingan model dengan data asli
                 st.write("Hasil Perbandingan Model:")
                 st.write(df_comparison)
                 
